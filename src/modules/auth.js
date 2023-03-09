@@ -3,12 +3,21 @@ const state = {
 }
 
 const mutations = {
-    setLoading(){
+    setLoading(state){
         state.isLoading = true
+    }
+}
+
+const actions = {
+    register(context){
+        setTimeout(() => {
+            context.commit('setLoading')
+        }, 1000)
     }
 }
 
 export default {
     state,
-    mutations
+    mutations,
+    actions
 }

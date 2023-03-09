@@ -10,7 +10,7 @@
 
             <Input :label="'Password'" :type="'password'" :id="'floatingPassword'"/>
 
-            <Button type="submit">Register</Button>
+            <Button type="submit" :disabled="isLoading" @click="setLoading">Register</Button>
         </form>
     </main>
 </template>
@@ -21,6 +21,21 @@ export default{
     data(){
         return {
             logo
+        }
+    },
+    computed: {
+        isLoading(){
+            return this.$store.state.auth.isLoading
+        }
+    },
+    methods: {
+        setLoading(e){
+            e.preventDefault();
+            // Mutations commit qilinadi
+            // this.$store.commit('setLoading')
+
+            // Actions dispatch qilinadi
+            this.$store.dispatch('register')
         }
     }
 }
