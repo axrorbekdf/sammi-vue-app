@@ -1,0 +1,3 @@
+npm install vue@latest
+
+npm install vuex@next --save
