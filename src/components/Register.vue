@@ -9,6 +9,7 @@
                 :type="'text'" 
                 :id="'floatingName'"
                 :error="errors.username"
+                v-model="username"
             />
 
             <Input 
@@ -16,6 +17,7 @@
                 :type="'email'" 
                 :id="'floatingEmail'"
                 :error="errors.email"
+                v-model="email"
             />
 
             <Input 
@@ -23,6 +25,7 @@
                 :type="'password'" 
                 :id="'floatingPassword'"
                 :error="errors.password"
+                v-model="password"
             />
 
             <Button type="submit" :disabled="isLoading" @click="setLoading">Register</Button>
@@ -58,16 +61,21 @@ export default{
             // this.$store.commit('setLoading')
 
             const user = {
-                username: 'testkiasdasd546',
-                email: 'testkasdasdi546@ki.ki',
-                password: '12345678'
+                username: this.username,
+                email: this.email,
+                password: this.password
             }
 
             // Actions lar dispatch qilinadi
             this.$store.dispatch('register', user)
-            .then(user => console.log("USER: ", user))
+            .then(user => {
+                this.$router.push({name:'home'})
+            })
             .catch(error => {
-                console.log("ERROR: ",error.username[0])  
+                this.errors = {};
+                for (const property in error) {
+                    this.errors[property] = error[property][0]
+                }
             })
         }
     }
