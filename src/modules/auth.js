@@ -1,4 +1,5 @@
 import AuthService from "../service/auth"
+import { setItem } from "../helpers/persistaneStorage"
 
 const state = {
     isLoading: false,
@@ -31,6 +32,7 @@ const actions = {
             .then(response => {
                 context.commit('registerSuccess', response.data.user)
                 resolve(response.data.user)
+                setItem('token', response.data.user.token)
             })
             .catch(error => {
                 context.commit('registerFailure', error.response.data.errors)
