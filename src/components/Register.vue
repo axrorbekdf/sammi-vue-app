@@ -4,11 +4,12 @@
             <img :src="logo" alt="" style="width: 200px;">
             <h1 class="h2 mb-3 mt-3 fw-normal">Register</h1>
             
+            <ValidationError v-if="validationError" :validationError="validationError" />
+
             <Input 
                 :label="'Name'" 
                 :type="'text'" 
                 :id="'floatingName'"
-                :error="errors.username"
                 v-model="username"
             />
 
@@ -16,7 +17,6 @@
                 :label="'Email address'" 
                 :type="'email'" 
                 :id="'floatingEmail'"
-                :error="errors.email"
                 v-model="email"
             />
 
@@ -24,7 +24,6 @@
                 :label="'Password'" 
                 :type="'password'" 
                 :id="'floatingPassword'"
-                :error="errors.password"
                 v-model="password"
             />
 
@@ -35,6 +34,8 @@
 
 <script>
 import { logo } from '../constants';
+import ValidationError from './ValidationError.vue';
+
 export default{
     data(){
         return {
@@ -42,16 +43,17 @@ export default{
             email:'',
             password:'',
             username: '',
-            errors: {
-                email: null,
-                username: null,
-                password: null,
-            },
         }
+    },
+    components:{
+        ValidationError
     },
     computed: {
         isLoading(){
             return this.$store.state.auth.isLoading
+        },
+        validationError(){
+            return this.$store.state.auth.errors;
         }
     },
     methods: {
@@ -71,12 +73,7 @@ export default{
             .then(user => {
                 this.$router.push({name:'home'})
             })
-            .catch(error => {
-                this.errors = {};
-                for (const property in error) {
-                    this.errors[property] = error[property][0]
-                }
-            })
+            .catch(error => console.log("ERROR: ", error))
         }
     }
 }
