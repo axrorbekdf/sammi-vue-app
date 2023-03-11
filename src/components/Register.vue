@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import { logo } from '../constants';
 import ValidationError from './ValidationError.vue';
 
@@ -49,12 +50,16 @@ export default{
         ValidationError
     },
     computed: {
-        isLoading(){
-            return this.$store.state.auth.isLoading
-        },
-        validationError(){
-            return this.$store.state.auth.errors;
-        }
+        ...mapState({
+            isLoading: state => state.auth.isLoading,
+            validationError: state => state.auth.errors
+        }),
+        // isLoading(){
+        //     return this.$store.state.auth.isLoading
+        // },
+        // validationError(){
+        //     return this.$store.state.auth.errors
+        // }
     },
     methods: {
         setLoading(e){

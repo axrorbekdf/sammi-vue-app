@@ -2,13 +2,10 @@ import axios from "./axios";
 
 const AuthService = {
     register(user){
-        // const user = {
-        //     username: '',
-        //     email: '',
-        //     password: ''
-        // }
-
         return axios.post('/users', {user})
+    },
+    login(user){
+        return axios.post('/users/login', {user})
     }
 }
 
