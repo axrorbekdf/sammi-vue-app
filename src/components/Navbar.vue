@@ -9,6 +9,8 @@
                 <RouterLink :to="{name:'home'}" class="me-3 h5 py-2 text-dark text-decoration-none">
                     {{ user.username }}
                 </RouterLink>
+
+                <a href="#" @click="logout" class="me-3 h5 py-2 text-dark text-decoration-none">Logout</a>
             </template>
             <template v-else>
                 <RouterLink :to="{name:'login'}" class="me-3 h5 py-2 text-dark text-decoration-none">
@@ -27,6 +29,7 @@
 import {mapGetters, mapState} from 'vuex'
 import {logo} from '../constants'
 import {gettersTypes} from '../modules/types'
+import { removeItem } from '../helpers/persistaneStorage'
 
 export default {
     name: 'Navbar',
@@ -59,6 +62,10 @@ export default {
     methods: {
         toHomeEventHandle(){
             return this.$router.push({name:'home'})
+        },
+
+        logout(){
+            return this.$store.dispatch('logout')
         }
     }
 }
