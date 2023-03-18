@@ -6,8 +6,8 @@
     
             <Button @click="deEventHandler"> - </Button>
         </div>
-        
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <Loader v-if="isLoading" />
+        <div v-else class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <ArticleCard v-for="article in data" :key="article.id" :article="article"/>
         </div>
     </div>

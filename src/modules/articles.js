@@ -13,7 +13,7 @@ const mutations = {
         state.error = null
     },
     getArticlesSuccess(state, payload){
-        state.isLoading = true
+        state.isLoading = false
         state.data = payload
     },
     getArticlesFailure(state){
