@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import articles from '../modules/articles'
 import auth from '../modules/auth'
 import counter from '../modules/counter'
 
@@ -23,7 +24,8 @@ const store = createStore({
   getters:{},
   modules:{
     auth,
-    counter
+    counter,
+    articles,
 }
 })
 

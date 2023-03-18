@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default{
     methods: {
         inEventHandler(){
@@ -20,9 +21,17 @@ export default{
         }
     },
     computed: {
+        ...mapState({
+            data: state => state.articles.data,
+            isLoading: state => state.articles.isLoading,
+            data: state => state.articles.error,
+        }),
         counter(){
             return this.$store.state.counter.count
         }
+    },
+    mounted(){
+        this.$store.dispatch('articles')
     }
 }
 </script>
